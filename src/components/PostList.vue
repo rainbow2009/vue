@@ -1,8 +1,15 @@
 <template>
-  <div>
+  <div  v-if="posts[0] " >
     <h3>List of posts</h3>
-    <post-item v-for="post in posts" :post="post" />
+    <post-item
+      v-for="post in posts"
+      :post="post"
+      :key="post.id"
+      @remove="$emit('remove', post)"
+    />
   </div>
+  <h2 v-else style="color:red">Post not found</h2>
+
 </template>
 
 <script>
