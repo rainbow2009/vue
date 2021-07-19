@@ -1,14 +1,17 @@
 <template>
   <div class="app">
     <h1>Post List</h1>
-    <my-button style="margin: 15px 0" @click="showDialog"
-      >Create Post
-    </my-button>
+    <div class="app__btns">
+      <my-button style="margin: 15px 0" @click="showDialog"
+        >Create Post
+      </my-button>
+      <my-select v-model="selectedSort" :options="sortOptions"></my-select>
+    </div>
 
     <my-dialog v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </my-dialog>
-    <post-list v-if="!isPostLoading" :posts="posts" @remove="removePost" />
+    <post-list v-if="!isPostLoading" :posts="sortedPosts" @remove="removePost" />
     <div v-else>Loading posts...</div>
   </div>
 </template>
@@ -28,6 +31,11 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostLoading: false,
+      selectedSort: "",
+      sortOptions: [
+        { value: "title", name: "Name" },
+        { value: "body", name: "Decription" },
+      ],
     };
   },
   methods: {
@@ -50,7 +58,7 @@ export default {
         this.posts = response.data;
       } catch (e) {
         alert("error");
-      }finally{
+      } finally {
         this.isPostLoading = false;
       }
     },
@@ -58,6 +66,18 @@ export default {
   mounted() {
     this.fetchPosts();
   },
+  computed:{
+    sortedPosts(){
+      return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]));
+    }
+  },
+  // watch: {
+  //   selectedSort(newValue) {
+  //     this.posts.sort((post1, post2) => {
+  //       return post1[newValue]?.localeCompare(post2[newValue]);
+  //     });
+  //   },
+  // },
 };
 </script>
 
@@ -69,5 +89,10 @@ export default {
 }
 .app {
   padding: 20px;
+}
+.app__btns {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
