@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     changeOtions(e) {
-      this.$emit("update:modelValue", e.target.value);
+      this.$emit("change:page", e.target.value);
     },
   },
 };
