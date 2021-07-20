@@ -1,6 +1,5 @@
 <template>
-  <h1>Hellow bro</h1>
-  <router-link to="/post"></router-link>
+  <div><h1>POST ID:{{$route.params.id}}</h1></div>
 </template>
 
 <script>

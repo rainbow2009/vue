@@ -1,6 +1,7 @@
 import Main from "@/pages/Main"
 import PostPage from "@/pages/PostPage"
-import { createRouter, createWebHashHistory } from "vue-router"
+import PostId from "@/pages/PostId"
+import { createRouter, createWebHistory } from "vue-router"
 
 const routes = [
     {
@@ -10,12 +11,16 @@ const routes = [
     {
         path: '/posts/',
         component: PostPage
+    },
+    {
+        path: '/post/:id',
+        component: PostId
     }
 ]
 
 const router = createRouter({
     routes,
-    history: createWebHashHistory(process.env.BASE_URL)
+    history: createWebHistory(process.env.BASE_URL)
 });
 
 export default router;

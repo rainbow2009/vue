@@ -18,10 +18,10 @@
       @remove="removePost"
     />
     <div v-else>Loading posts...</div>
-    <div ref="observer" class="observer"></div>
+    <div  v-intersection="loadMorePost" class="observer"></div>
   </div>
 
-  <!-- <my-plaginate v-model="page" :page="page" :totalPages="totalPages" /> -->
+  <my-plaginate v-model="page" :page="page" :totalPages="totalPages" />
 </template>
 
 <script>
@@ -109,17 +109,7 @@ export default {
   },
   mounted() {
     this.fetchPosts();
-    const options = {
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-    const callback = (entries, observer) => {
-      if (entries[0].isIntersecting && this.page < this.totalPages) {
-        this.loadMorePost();
-      }
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer);
+   
   },
   computed: {
     sortedPosts() {
