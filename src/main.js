@@ -4,6 +4,7 @@ import components from '@/components/UI'
 import router from '@/router/routers';
 import VIntersection from '@/directives/VIntersection'
 import directives from '@/directives';
+import store from './store';
 
 const app = createApp(App);
 
@@ -19,4 +20,5 @@ directives.forEach(directives => {
 
 app
     .use(router)
+    .use(store)
     .mount('#app')
