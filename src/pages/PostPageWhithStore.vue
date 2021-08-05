@@ -42,18 +42,7 @@ export default {
   },
   data() {
     return {
-      posts: [],
-      dialogVisible: false,
-      isPostLoading: false,
-      selectedSort: "",
-      searchQuery: "",
-      page: 1,
-      limit: 10,
-      totalPages: 0,
-      sortOptions: [
-        { value: "title", name: "Name" },
-        { value: "body", name: "Decription" },
-      ],
+    
     };
   },
   methods: {
@@ -117,16 +106,7 @@ export default {
     this.fetchPosts();
   },
   computed: {
-    sortedPosts() {
-      return [...this.posts].sort((post1, post2) =>
-        post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
-      );
-    },
-    sortedAndSearchPost() {
-      return this.sortedPosts.filter((post) =>
-        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    },
+   
   },
   watch: {
     // page() {
